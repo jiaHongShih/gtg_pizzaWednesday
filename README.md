@@ -1,4 +1,4 @@
-# GrowToGather — Event Landing (AWS Amplify ready) <now using github>
+# GrowToGather — Event Landing (AWS Amplify ready) <now using git>
 
 A minimal, production-ready landing page for an event:
 - Plays an intro video (YouTube or MP4)
@@ -11,7 +11,7 @@ A minimal, production-ready landing page for an event:
 Create a `.env` file (or Amplify environment variables) with:
 
 ```
-VITE_FORM_URL=https://docs.google.com/forms/d/1jjdMIlklNMTwcaEhz7ZsIjQQNN7KE51pSyZTo0JXcQE/edit
+VITE_FORM_URL=https://forms.gle/your-google-form-id
 VITE_VIDEO_URL=https://www.youtube.com/watch?v=XXXXXXXXXXX
 # or use an MP4 URL for VITE_VIDEO_URL
 ```

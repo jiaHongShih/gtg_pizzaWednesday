@@ -34,7 +34,7 @@ jobs:
 
       - run: npm run build
         env:
-          VITE_FORM_URL: https://forms.gle/your-google-form-id
+          VITE_FORM_URL: https://docs.google.com/forms/d/1jjdMIlklNMTwcaEhz7ZsIjQQNN7KE51pSyZTo0JXcQE/edit
           VITE_VIDEO_URL: https://www.youtube.com/watch?v=04tup1vpVgE
 
       - run: cp dist/index.html dist/404.html
