@@ -71,7 +71,7 @@ export default function App() {
           <video
             ref={videoRef}
             className="video"
-            src="/intro.mp4"
+            src="/intro.mov"
             playsInline
             controls
             muted
