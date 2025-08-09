@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 
 const formUrl = import.meta.env.VITE_FORM_URL as string | undefined
 
+// 檢查是否為手機
 const useIsMobile = () => {
   const [isMobile, setIsMobile] = useState<boolean>(
     typeof window !== 'undefined' ? window.matchMedia('(max-width: 767px)').matches : false
@@ -22,7 +23,6 @@ export default function App() {
   useEffect(() => {
     if (!videoRef.current) return
     if (isMobile) {
-      // Mobile: loop & autoplay muted
       videoRef.current.muted = true
       videoRef.current.loop = true
       videoRef.current.playsInline = true
@@ -45,7 +45,7 @@ export default function App() {
 
   return (
     <div className="page">
-      {/* Sticky header */}
+      {/* 頂部導覽列 */}
       <header className="nav">
         <div className="nav-inner">
           <div className="brand">
@@ -60,31 +60,25 @@ export default function App() {
       </header>
 
       <main className="container">
-        {/* Hero */}
+        {/* Hero 區塊 */}
         <section className="hero fade-in-up">
           <h1 className="title">GrowToGather Networking Event</h1>
           <p className="subtitle">Connect with students and newcomers. Learn, share, and build your network.</p>
           <div className="divider" />
         </section>
 
-        {/* Video */}
+        {/* 影片區塊 */}
         <section className="video-card fade-in-up" aria-label="Event introduction video">
           <video
             ref={videoRef}
             className="video"
-            // 用 <source> 列出多種格式，優先 mp4
+            src="/intro.mp4"  // public 資料夾中的影片
             playsInline
             controls
             muted
             onMouseEnter={onMouseEnterVideo}
             onMouseLeave={onMouseLeaveVideo}
-            preload="metadata"
-            poster="/poster.jpg" // 可選：放一張封面在 public/poster.jpg
-          >
-            <source src="/intro.mp4?v=1" type="video/mp4" />
-            <source src="/intro.mov" type="video/quicktime" />
-            Your browser does not support the video tag.
-          </video>
+          />
         </section>
 
         {/* CTA */}
@@ -112,6 +106,7 @@ export default function App() {
     </div>
   )
 }
+
 
 
 // import React from 'react'
