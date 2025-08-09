@@ -1,4 +1,4 @@
-# GrowToGather — Event Landing (AWS Amplify ready)
+# GrowToGather — Event Landing (AWS Amplify ready) <now using github>
 
 A minimal, production-ready landing page for an event:
 - Plays an intro video (YouTube or MP4)
