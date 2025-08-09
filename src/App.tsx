@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react'
 
 const formUrl = import.meta.env.VITE_FORM_URL as string | undefined
 
-// 檢查是否為手機
 const useIsMobile = () => {
   const [isMobile, setIsMobile] = useState<boolean>(
     typeof window !== 'undefined' ? window.matchMedia('(max-width: 767px)').matches : false
@@ -45,7 +44,7 @@ export default function App() {
 
   return (
     <div className="page">
-      {/* 頂部導覽列 */}
+      {/* Header */}
       <header className="nav">
         <div className="nav-inner">
           <div className="brand">
@@ -60,19 +59,21 @@ export default function App() {
       </header>
 
       <main className="container">
-        {/* Hero 區塊 */}
+        {/* Hero */}
         <section className="hero fade-in-up">
-          <h1 className="title">GrowToGather Networking Event</h1>
-          <p className="subtitle">Connect with students and newcomers. Learn, share, and build your network.</p>
+          <h1 className="title">Pizza Wednesday — GrowToGather</h1>
+          <p className="subtitle">
+            Meet new friends, share pizza, and enjoy board games every Wednesday in Ottawa.
+          </p>
           <div className="divider" />
         </section>
 
-        {/* 影片區塊 */}
+        {/* Video */}
         <section className="video-card fade-in-up" aria-label="Event introduction video">
           <video
             ref={videoRef}
             className="video"
-            src="/intro.mp4"  // public 資料夾中的影片
+            src={`${import.meta.env.BASE_URL}intro.mp4`}  // ✅ 正確處理 GitHub Pages 子路徑
             playsInline
             controls
             muted
@@ -95,7 +96,9 @@ export default function App() {
           >
             {formUrl ? 'Register on Google Form' : 'Set VITE_FORM_URL to enable registration'}
           </a>
-          <p className="microcopy">Opens Google Form in a new tab.</p>
+          <p className="microcopy">
+            Fill out the form to join our next Pizza Wednesday!
+          </p>
         </section>
 
         {/* Footer */}
@@ -106,7 +109,6 @@ export default function App() {
     </div>
   )
 }
-
 
 
 // import React from 'react'

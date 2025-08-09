@@ -34,7 +34,7 @@ jobs:
 
       - run: npm run build
         env:
-          VITE_FORM_URL: https://docs.google.com/forms/d/1jjdMIlklNMTwcaEhz7ZsIjQQNN7KE51pSyZTo0JXcQE/edit
+          VITE_FORM_URL: https://docs.google.com/forms/d/e/1FAIpQLSdORzmzExK0OCnY8RXFQAUQxm5MPEJ6Z_GeLm2oDGKQT-zrwg/viewform?usp=dialog
           VITE_VIDEO_URL: https://www.youtube.com/watch?v=04tup1vpVgE
 
       - run: cp dist/index.html dist/404.html
