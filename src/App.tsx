@@ -75,7 +75,6 @@ export default function App() {
             src={videoSrc}
             playsInline
             controls
-            muted
             onMouseEnter={onMouseEnterVideo}
             onMouseLeave={onMouseLeaveVideo}
           />

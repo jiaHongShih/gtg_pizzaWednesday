@@ -92,12 +92,20 @@ button.disabled {
   height: auto;
   background: black;
 }
+
+/* Mobile: show full video without cropping */
 @media (max-width: 767px) {
+  .container { padding: 0; }            /* optional: let video breathe */
+  .video-card { border-radius: 0; border: none; } /* optional: edge-to-edge */
+
   .video {
-    height: 100vh;
-    object-fit: cover;
+    width: 100vw;
+    height: 100dvh;                     /* full viewport height */
+    object-fit: contain;                /* <-- key change: no crop */
+    background: #000;                   /* letterbox */
   }
 }
+
 
 /* Hero */
 .hero {
