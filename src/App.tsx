@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 
 const formUrl = import.meta.env.VITE_FORM_URL as string | undefined
 
+// Mobile detector
 const useIsMobile = () => {
   const [isMobile, setIsMobile] = useState<boolean>(
     typeof window !== 'undefined' ? window.matchMedia('(max-width: 767px)').matches : false
@@ -19,6 +20,7 @@ export default function App() {
   const isMobile = useIsMobile()
   const videoRef = useRef<HTMLVideoElement | null>(null)
 
+  // Mobile: autoplay + loop
   useEffect(() => {
     if (!videoRef.current) return
     if (isMobile) {
@@ -30,6 +32,7 @@ export default function App() {
     }
   }, [isMobile])
 
+  // Desktop: hover to play
   const onMouseEnterVideo = () => {
     if (!isMobile && videoRef.current) {
       videoRef.current.muted = true
@@ -42,9 +45,12 @@ export default function App() {
     }
   }
 
+  // Use BASE_URL so paths work on GitHub Pages
+  const videoSrc = new URL('intro.mp4', import.meta.env.BASE_URL).toString()
+
   return (
     <div className="page">
-      {/* Header */}
+      {/* Tiffany header, full-bleed */}
       <header className="nav">
         <div className="nav-inner">
           <div className="brand">
@@ -59,27 +65,27 @@ export default function App() {
       </header>
 
       <main className="container">
-        {/* Hero */}
-        <section className="hero fade-in-up">
-          <h1 className="title">Pizza Wednesday — GrowToGather</h1>
-          <p className="subtitle">
-            Meet new friends, share pizza, and enjoy board games every Wednesday in Ottawa.
-          </p>
-          <div className="divider" />
-        </section>
-
-        {/* Video */}
+        {/* VIDEO FIRST */}
         <section className="video-card fade-in-up" aria-label="Event introduction video">
           <video
             ref={videoRef}
             className="video"
-            src={`${import.meta.env.BASE_URL}intro.mp4`}  // ✅ 正確處理 GitHub Pages 子路徑
+            src={videoSrc}
             playsInline
             controls
             muted
             onMouseEnter={onMouseEnterVideo}
             onMouseLeave={onMouseLeaveVideo}
           />
+        </section>
+
+        {/* Copy below video */}
+        <section className="hero fade-in-up">
+          <h1 className="title">Pizza Wednesday — GrowToGather</h1>
+          <p className="subtitle">
+            Meet new friends, share pizza, and enjoy board games every Wednesday in Ottawa.
+          </p>
+          <div className="divider" />
         </section>
 
         {/* CTA */}
@@ -90,18 +96,13 @@ export default function App() {
             target="_blank"
             rel="noreferrer noopener"
             aria-disabled={!formUrl}
-            onClick={(e) => {
-              if (!formUrl) e.preventDefault()
-            }}
+            onClick={(e) => { if (!formUrl) e.preventDefault() }}
           >
             {formUrl ? 'Register on Google Form' : 'Set VITE_FORM_URL to enable registration'}
           </a>
-          <p className="microcopy">
-            Fill out the form to join our next Pizza Wednesday!
-          </p>
+          <p className="microcopy">Fill out the form to join our next Pizza Wednesday!</p>
         </section>
 
-        {/* Footer */}
         <footer className="footer fade-in-up">
           <p>© {new Date().getFullYear()} GrowToGather • Ottawa, Canada</p>
         </footer>
@@ -109,6 +110,8 @@ export default function App() {
     </div>
   )
 }
+
+
 
 
 // import React from 'react'
