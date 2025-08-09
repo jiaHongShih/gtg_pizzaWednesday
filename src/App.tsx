@@ -1,56 +1,54 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from "react";
 
-const formUrl = import.meta.env.VITE_FORM_URL as string | undefined
+const formUrl = import.meta.env.VITE_FORM_URL as string | undefined;
 
-// Mobile detector
 const useIsMobile = () => {
-  const [isMobile, setIsMobile] = useState<boolean>(
-    typeof window !== 'undefined' ? window.matchMedia('(max-width: 767px)').matches : false
-  )
+  const [isMobile, setIsMobile] = useState(
+    typeof window !== "undefined"
+      ? window.matchMedia("(max-width: 767px)").matches
+      : false
+  );
   useEffect(() => {
-    const mq = window.matchMedia('(max-width: 767px)')
-    const onChange = () => setIsMobile(mq.matches)
-    mq.addEventListener?.('change', onChange)
-    return () => mq.removeEventListener?.('change', onChange)
-  }, [])
-  return isMobile
-}
+    const mq = window.matchMedia("(max-width: 767px)");
+    const onChange = () => setIsMobile(mq.matches);
+    mq.addEventListener?.("change", onChange);
+    return () => mq.removeEventListener?.("change", onChange);
+  }, []);
+  return isMobile;
+};
 
 export default function App() {
-  const isMobile = useIsMobile()
-  const videoRef = useRef<HTMLVideoElement | null>(null)
+  const isMobile = useIsMobile();
+  const videoRef = useRef<HTMLVideoElement | null>(null);
 
-  // Mobile: autoplay + loop
   useEffect(() => {
-    if (!videoRef.current) return
+    if (!videoRef.current) return;
     if (isMobile) {
-      videoRef.current.muted = true
-      videoRef.current.loop = true
-      videoRef.current.playsInline = true
-      videoRef.current.autoplay = true
-      videoRef.current.play().catch(() => {})
+      videoRef.current.muted = true;
+      videoRef.current.loop = true;
+      videoRef.current.playsInline = true;
+      videoRef.current.autoplay = true;
+      videoRef.current.play().catch(() => {});
     }
-  }, [isMobile])
+  }, [isMobile]);
 
-  // Desktop: hover to play
   const onMouseEnterVideo = () => {
     if (!isMobile && videoRef.current) {
-      videoRef.current.muted = true
-      videoRef.current.play().catch(() => {})
+      videoRef.current.muted = true;
+      videoRef.current.play().catch(() => {});
     }
-  }
+  };
   const onMouseLeaveVideo = () => {
     if (!isMobile && videoRef.current) {
-      videoRef.current.pause()
+      videoRef.current.pause();
     }
-  }
+  };
 
-  // Use BASE_URL so paths work on GitHub Pages
-  const videoSrc = new URL('intro.mp4', import.meta.env.BASE_URL).toString()
+  const videoSrc = `${import.meta.env.BASE_URL}intro.mp4`;
 
   return (
     <div className="page">
-      {/* Tiffany header, full-bleed */}
+      {/* Header */}
       <header className="nav">
         <div className="nav-inner">
           <div className="brand">
@@ -58,14 +56,18 @@ export default function App() {
             <span className="brand-text">GrowToGather</span>
           </div>
           <div className="auth-actions">
-            <button className="ghost disabled" aria-disabled title="Coming soon">Log in</button>
-            <button className="primary disabled" aria-disabled title="Coming soon">Sign up</button>
+            <button className="ghost disabled" aria-disabled title="Coming soon">
+              Log in
+            </button>
+            <button className="primary disabled" aria-disabled title="Coming soon">
+              Sign up
+            </button>
           </div>
         </div>
       </header>
 
       <main className="container">
-        {/* VIDEO FIRST */}
+        {/* Video First */}
         <section className="video-card fade-in-up" aria-label="Event introduction video">
           <video
             ref={videoRef}
@@ -79,7 +81,7 @@ export default function App() {
           />
         </section>
 
-        {/* Copy below video */}
+        {/* Hero */}
         <section className="hero fade-in-up">
           <h1 className="title">Pizza Wednesday — GrowToGather</h1>
           <p className="subtitle">
@@ -91,28 +93,30 @@ export default function App() {
         {/* CTA */}
         <section className="cta fade-in-up">
           <a
-            className={`btn ${formUrl ? '' : 'btn-disabled'}`}
-            href={formUrl || '#'}
+            className={`btn ${formUrl ? "" : "btn-disabled"}`}
+            href={formUrl || "#"}
             target="_blank"
             rel="noreferrer noopener"
             aria-disabled={!formUrl}
-            onClick={(e) => { if (!formUrl) e.preventDefault() }}
+            onClick={(e) => {
+              if (!formUrl) e.preventDefault();
+            }}
           >
-            {formUrl ? 'Register on Google Form' : 'Set VITE_FORM_URL to enable registration'}
+            {formUrl ? "Register on Google Form" : "Set VITE_FORM_URL to enable registration"}
           </a>
-          <p className="microcopy">Fill out the form to join our next Pizza Wednesday!</p>
+          <p className="microcopy">
+            Fill out the form to join our next Pizza Wednesday!
+          </p>
         </section>
 
+        {/* Footer */}
         <footer className="footer fade-in-up">
           <p>© {new Date().getFullYear()} GrowToGather • Ottawa, Canada</p>
         </footer>
       </main>
     </div>
-  )
+  );
 }
-
-
-
 
 // import React from 'react'
 
